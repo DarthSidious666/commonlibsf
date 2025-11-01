@@ -2,6 +2,33 @@
 
 namespace RE::BSScript
 {
+	void Object::dtor()
+	{
+		static REL::Relocation<void (*)(Object*)> UnkObjectDtorSubroutine{ ID::BSScript::Object::dtorUnkSub };
+		typedef ObjectTypeInfo* (*ObjectTypeInfoDeallocator)(ObjectTypeInfo*, std::uint32_t);
+		static REL::Relocation<ObjectTypeInfoDeallocator> ObjectTypeInfoDealloc{ ID::BSScript::ObjectTypeInfo::dtor };
+
+		this->lockStructure =
+			reinterpret_cast<void*>(reinterpret_cast<volatile std::uint64_t>(this->lockStructure) & 0xfffffffffffffffe);
+
+		if (this->lockStructure != 0) {
+			_InterlockedExchangeAdd(reinterpret_cast<volatile long*>(this->lockStructure), -1);
+		}
+
+		ObjectTypeInfo* pType = this->type.get();
+
+		//BSTSmartPointer will decrement type's refcount automatically at end of scope
+		if (pType->QRefCount() == 1) {
+			//This stops the smart pointer from dereferencing a dangling ObjectTypeInfo pointer after
+			//ObjectTypeInfoDealloc frees Object::type (and also does unknown global/TLS variable plumbing)
+			this->type->IncRef();
+			this->type.reset();
+			ObjectTypeInfoDealloc(pType, 1);
+		}
+
+		UnkObjectDtorSubroutine(this);
+	}
+
 	[[nodiscard]] std::uint32_t Object::DecRef()
 	{
 		std::int32_t  iVar1;
