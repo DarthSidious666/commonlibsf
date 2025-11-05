@@ -32,24 +32,24 @@ namespace RE::ID
 
 	namespace ActorValue
 	{
-		inline constexpr REL::ID GetSingleton{ 0 };  // 36266
+		inline constexpr REL::ID GetSingleton{ 43134 };  // 36266
 	}
 
 	namespace ActorEquipManager
 	{
-		inline constexpr REL::ID Singleton{ 0 };      // 879425
-		inline constexpr REL::ID EquipObject{ 0 };    // 151991
-		inline constexpr REL::ID UnequipObject{ 0 };  // 152007
+		inline constexpr REL::ID Singleton{ 938503 };  // 879425
+		inline constexpr REL::ID EquipObject{ 0 };    // 151991 -> TODO: Verify 101949 in 1.15
+		inline constexpr REL::ID UnequipObject{ 0 };  // 152007 -> TODO: Verify 101951 in 1.15
 	}
 
 	namespace ActorCellChangeEvent::Event
 	{
-		inline constexpr REL::ID GetEventSource{ 0 };  // 107081
+		inline constexpr REL::ID GetEventSource{ 64106 };  // 107081
 	}
 
 	namespace ActorItemEquipped::Event
 	{
-		inline constexpr REL::ID GetEventSource{ 0 };  // 151162
+		inline constexpr REL::ID GetEventSource{ 100427 };  // 151162
 	}
 
 	namespace AttachReference::Event
@@ -140,13 +140,14 @@ namespace RE::ID
 
 	namespace BGSInventoryInterface
 	{
-		inline constexpr REL::ID Singleton{ 0 };           // 825787
-		inline constexpr REL::ID GetInventoryObject{ 0 };  // 87520
+		inline constexpr REL::ID Singleton{ 883301 };      // 825787
+		inline constexpr REL::ID GetInventoryObject{ 0 };  // 87520 - inlined
+		inline constexpr REL::ID GetInventoryObjectSub{ 63846 };
 	}
 
 	namespace BGSObjectInstance
 	{
-		inline constexpr REL::ID ctor{ 0 };  // 101725
+		inline constexpr REL::ID ctor{ 59786 };  // 101725
 	}
 
 	namespace BGSPlanet::PlayerKnowledgeFlagSetEvent
@@ -247,8 +248,9 @@ namespace RE::ID
 	namespace BSNonReentrantSpinLock
 	{
 		inline constexpr REL::ID Lock{ 37396 };
-		inline constexpr REL::ID TryLock{ 0 };  // 74235 - inlined?
-		inline constexpr REL::ID Unlock{ 0 };   // 73895 - inlined?
+		inline constexpr REL::ID TryLock{ 0 };  // 74235 - inlined
+		inline constexpr REL::ID Unlock{ 0 };	// 73895 - inlined
+		inline constexpr REL::ID UnlockSubroutine{ 37393 };
 	}
 
 	namespace BSPointerHandleManagerInterface

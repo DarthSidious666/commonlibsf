@@ -4,9 +4,10 @@ namespace RE::BSScript
 {
 	void Object::dtor()
 	{
-		static REL::Relocation<void (*)(Object*)> UnkObjectDtorSubroutine{ ID::BSScript::Object::dtorUnkSub };
-		typedef ObjectTypeInfo* (*ObjectTypeInfoDeallocator)(ObjectTypeInfo*, std::uint32_t);
-		static REL::Relocation<ObjectTypeInfoDeallocator> ObjectTypeInfoDealloc{ ID::BSScript::ObjectTypeInfo::dtor };
+		using func_t = decltype(&Object::dtor);
+		using func2_t = ObjectTypeInfo* (*)(ObjectTypeInfo*, std::uint32_t);
+		static REL::Relocation<func_t> UnkObjectDtorSubroutine{ ID::BSScript::Object::dtorUnkSub };
+		static REL::Relocation<func2_t> ObjectTypeInfoDealloc{ ID::BSScript::ObjectTypeInfo::dtor };
 
 		this->lockStructure =
 			reinterpret_cast<void*>(reinterpret_cast<volatile std::uint64_t>(this->lockStructure) & 0xfffffffffffffffe);

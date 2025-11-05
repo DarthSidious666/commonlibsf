@@ -11,16 +11,14 @@ namespace RE
 
 	bool BSNonReentrantSpinLock::TryLock()
 	{
-		using func_t = decltype(&BSNonReentrantSpinLock::TryLock);
-		static REL::Relocation<func_t> func{ ID::BSNonReentrantSpinLock::TryLock };
-		return func(this);
+		return _InterlockedOr(reinterpret_cast<volatile long*>(&this->m_lock), 1) == 0;
 	}
 
 	void BSNonReentrantSpinLock::Unlock()
 	{
-		using func_t = decltype(&BSNonReentrantSpinLock::Unlock);
-		static REL::Relocation<func_t> func{ ID::BSNonReentrantSpinLock::Unlock };
-		return func(this);
+		using func_t = int (*)(BSNonReentrantSpinLock*, std::int32_t, std::int8_t);
+		static REL::Relocation<func_t> func{ ID::BSNonReentrantSpinLock::UnlockSubroutine };
+		func(this, 1, 2);
 	}
 
 	void BSReadWriteLock::LockRead()
