@@ -56,15 +56,24 @@ namespace RE
 
 		[[nodiscard]] TESBoundObject* GetInventoryObject(const std::uint32_t& a_handleID) const
 		{
-			using func_t = decltype(&BGSInventoryInterface::GetInventoryObject);
-			static REL::Relocation<func_t> func{ ID::BGSInventoryInterface::GetInventoryObject };
-			return func(this, a_handleID);
+			using func_t = bool (*)(const BGSInventoryInterface*, const std::uint32_t*, std::uint64_t***);
+			static REL::Relocation<func_t> subfn{ ID::BGSInventoryInterface::GetInventoryObjectSub };
+
+			std::uint32_t   handle = a_handleID;
+			std::uint64_t   out = 0;
+			std::uint64_t*  outarr[2];
+			std::uint64_t** pout;
+			outarr[0] = &out;
+			pout = (std::uint64_t**)&outarr;
+			subfn(this, &handle, &pout);
+			return reinterpret_cast<TESBoundObject*>(out);
 		}
 
 		virtual ~BGSInventoryInterface();  // 00
 
 		// members
-		BSTArray<Agent> agentArray;  // 30
+		std::uint64_t   unk30;       // 30
+		BSTArray<Agent> agentArray;  // 38
 	};
 	//static_assert(sizeof(BGSInventoryInterface) == 0x48);
 }
