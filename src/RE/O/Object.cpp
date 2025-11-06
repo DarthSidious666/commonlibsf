@@ -6,7 +6,7 @@ namespace RE::BSScript
 	{
 		using func_t = decltype(&Object::dtor);
 		using func2_t = ObjectTypeInfo* (*)(ObjectTypeInfo*, std::uint32_t);
-		static REL::Relocation<func_t> UnkObjectDtorSubroutine{ ID::BSScript::Object::dtorUnkSub };
+		static REL::Relocation<func_t>  UnkObjectDtorSubroutine{ ID::BSScript::Object::dtorUnkSub };
 		static REL::Relocation<func2_t> ObjectTypeInfoDealloc{ ID::BSScript::ObjectTypeInfo::dtor };
 
 		this->lockStructure =

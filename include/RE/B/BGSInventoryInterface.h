@@ -54,18 +54,17 @@ namespace RE
 			return *singleton;
 		}
 
-
 		[[nodiscard]] TESBoundObject* GetInventoryObject(const std::uint32_t& a_handleID) const
 		{
 			using func_t = bool (*)(const BGSInventoryInterface*, const std::uint32_t*, std::uint64_t***);
 			static REL::Relocation<func_t> subfn{ ID::BGSInventoryInterface::GetInventoryObjectSub };
 
-			std::uint32_t handle = a_handleID;
-			std::uint64_t out = 0;
-			std::uint64_t* outarr[2];
+			std::uint32_t   handle = a_handleID;
+			std::uint64_t   out = 0;
+			std::uint64_t*  outarr[2];
 			std::uint64_t** pout;
 			outarr[0] = &out;
-			pout = (std::uint64_t**) &outarr;
+			pout = (std::uint64_t**)&outarr;
 			subfn(this, &handle, &pout);
 			return reinterpret_cast<TESBoundObject*>(out);
 		}

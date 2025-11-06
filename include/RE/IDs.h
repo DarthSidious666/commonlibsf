@@ -38,8 +38,8 @@ namespace RE::ID
 	namespace ActorEquipManager
 	{
 		inline constexpr REL::ID Singleton{ 938503 };  // 879425
-		inline constexpr REL::ID EquipObject{ 0 };    // 151991 -> TODO: Verify 101949 in 1.15
-		inline constexpr REL::ID UnequipObject{ 0 };  // 152007 -> TODO: Verify 101951 in 1.15
+		inline constexpr REL::ID EquipObject{ 0 };     // 151991 -> TODO: Verify 101949 in 1.15
+		inline constexpr REL::ID UnequipObject{ 0 };   // 152007 -> TODO: Verify 101951 in 1.15
 	}
 
 	namespace ActorCellChangeEvent::Event
@@ -249,7 +249,7 @@ namespace RE::ID
 	{
 		inline constexpr REL::ID Lock{ 37396 };
 		inline constexpr REL::ID TryLock{ 0 };  // 74235 - inlined
-		inline constexpr REL::ID Unlock{ 0 };	// 73895 - inlined
+		inline constexpr REL::ID Unlock{ 0 };   // 73895 - inlined
 		inline constexpr REL::ID UnlockSubroutine{ 37393 };
 	}
 
