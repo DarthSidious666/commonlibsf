@@ -68,7 +68,7 @@ namespace RE
 			UnkStruct*      pOutstruct = &outstruct;
 
 			using func_t = bool (*)(const BGSInventoryInterface*, const std::uint32_t*, UnkStruct**);
-			static REL::Relocation<func_t> GetInventoryObjectHelperFn { ID::BGSInventoryInterface::GetInventoryObjectSub };
+			static REL::Relocation<func_t> GetInventoryObjectHelperFn{ ID::BGSInventoryInterface::GetInventoryObjectSub };
 			GetInventoryObjectHelperFn(this, &handle, &pOutstruct);
 
 			return pObj;
